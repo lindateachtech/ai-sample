@@ -1,0 +1,177 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainerMobileState/2.7.0/schema.json",
+  "position": {
+    "x": 0,
+    "y": 1302,
+    "z": 5000,
+    "height": 417,
+    "width": 324,
+    "tabOrder": 4000
+  },
+  "objects": {
+    "valueAxis": [
+      {
+        "properties": {
+          "gridlineShow": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          },
+          "roundRange": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "general": [
+      {
+        "properties": {
+          "responsive": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "categoryAxis": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "fontSize": {
+            "expr": {
+              "Literal": {
+                "Value": "8D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "legend": [],
+    "dataPoint": [],
+    "labels": [],
+    "anomalyDetection": [],
+    "lineStyles": [],
+    "seriesLabels": []
+  },
+  "visualContainerObjects": {
+    "title": [
+      {
+        "properties": {
+          "fontSize": {
+            "expr": {
+              "Literal": {
+                "Value": "10D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "border": [
+      {
+        "properties": {
+          "show": {
+            "expr": {
+              "Literal": {
+                "Value": "true"
+              }
+            }
+          },
+          "radius": {
+            "expr": {
+              "Literal": {
+                "Value": "2D"
+              }
+            }
+          },
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "ThemeDataColor": {
+                    "ColorId": 9,
+                    "Percent": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "dropShadow": [
+      {
+        "properties": {
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "50D"
+              }
+            }
+          },
+          "shadowDistance": {
+            "expr": {
+              "Literal": {
+                "Value": "2D"
+              }
+            }
+          },
+          "angle": {
+            "expr": {
+              "Literal": {
+                "Value": "45D"
+              }
+            }
+          },
+          "shadowBlur": {
+            "expr": {
+              "Literal": {
+                "Value": "6D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [],
+    "visualTooltip": [],
+    "visualHeader": [],
+    "stylePreset": [],
+    "subTitle": [
+      {
+        "properties": {
+          "fontSize": {
+            "expr": {
+              "Literal": {
+                "Value": "8D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

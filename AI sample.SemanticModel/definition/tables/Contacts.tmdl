@@ -1,0 +1,185 @@
+/// Individual people at each account. Use for contact lists, org charts, and account details visuals.
+table Contacts
+	lineageTag: 59b3ba36-d753-49c2-aa4c-d326b45f4e58
+
+	column ContactID
+		dataType: string
+		isHidden
+		lineageTag: 0b6ff5c1-eef1-45f7-ac22-b0e8f5e2439c
+		summarizeBy: none
+		sourceColumn: ContactID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Contact full name. Use as a row label in contact lists.
+	column Contact
+		dataType: string
+		displayFolder: Details
+		lineageTag: 10d57d42-d065-43d2-a0a7-3d8152532d5a
+		summarizeBy: none
+		sourceColumn: Contact
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Contact's role at the company. Use as a slicer to filter to decision makers.
+	column 'Job Title'
+		dataType: string
+		displayFolder: Details
+		lineageTag: 0147b56c-14b2-4fb7-ad9b-0f079507a212
+		summarizeBy: none
+		sourceColumn: Job Title
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Street address. Use in tooltips and contact detail cards.
+	column Street
+		dataType: string
+		displayFolder: Address
+		lineageTag: 33b76656-5c12-4293-9924-389918456541
+		dataCategory: Address
+		summarizeBy: none
+		sourceColumn: Street
+
+		annotation SummarizationSetBy = Automatic
+
+	/// City. Use on maps and geo slicers.
+	column City
+		dataType: string
+		displayFolder: Address
+		lineageTag: 209c59ab-197e-4e78-8a97-a4a97d62de90
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	/// State/Province. Use on maps and geo slicers.
+	column 'State or Province'
+		dataType: string
+		displayFolder: Address
+		lineageTag: c323828d-abcf-4123-9112-0424aad53654
+		dataCategory: StateOrProvince
+		summarizeBy: none
+		sourceColumn: State or Province
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Postal code. Use for granular geo grouping.
+	column 'Postal Code'
+		dataType: string
+		displayFolder: Address
+		lineageTag: 9732d2ea-458e-4d0c-8562-e38ef896f5cf
+		dataCategory: PostalCode
+		summarizeBy: none
+		sourceColumn: Postal Code
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Country. Use as top-level geo slicer or map field.
+	column Country
+		dataType: string
+		displayFolder: Address
+		lineageTag: 9af493af-3e4b-4069-91b6-139b2ce427ef
+		dataCategory: Country
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Latitude for mapping. Pair with Longitude on Azure or ArcGIS maps.
+	column Latitude
+		dataType: double
+		formatString: 0.00000
+		displayFolder: Address
+		lineageTag: fbf2dbd3-b8e7-460f-9ba8-997f2fe0c188
+		dataCategory: Latitude
+		summarizeBy: none
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Longitude for mapping. Pair with Latitude on Azure or ArcGIS maps.
+	column Longitude
+		dataType: double
+		formatString: 0.00000
+		displayFolder: Address
+		lineageTag: 3c4f11ed-c785-4dcf-909f-084c9d30d877
+		dataCategory: Longitude
+		summarizeBy: none
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	/// Contact phone. Use in detail tables and drillthrough.
+	column Phone
+		dataType: string
+		displayFolder: Address
+		lineageTag: 65bd01af-03ee-4dc1-b34e-f6b0438c3fa9
+		summarizeBy: none
+		sourceColumn: Phone
+
+		annotation SummarizationSetBy = Automatic
+
+	column ContactSeq
+		dataType: int64
+		isHidden
+		isKey
+		formatString: 0
+		lineageTag: 331cccc1-5d5a-47df-ac3e-28cb2686611f
+		summarizeBy: none
+		sourceColumn: ContactSeq
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountSeq
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 75e0447c-0e86-4f7b-bfb3-331f701f91da
+		summarizeBy: none
+		sourceColumn: AccountSeq
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Given name. Use in personalized detail cards or when concatenating names.
+	column 'First Name'
+		dataType: string
+		displayFolder: Name
+		lineageTag: 36d9dfb1-9b76-41ed-b31e-1f0d3b97c11e
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+	/// Family name. Use in sorted contact lists.
+	column 'Last Name'
+		dataType: string
+		displayFolder: Name
+		lineageTag: 481d782d-62ac-4421-8e57-f6abea81caf9
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Contacts-fc28db56-6378-4de8-be05-cd265898d7ea = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\misewell\OneDrive - Microsoft\Documents\GitHub\ContosoBI\Contoso - Generic\Contoso - PowerBI Source Data.xlsx"), null, true),
+				    ContactTbl_Table = Source{[Item="ContactTbl",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(ContactTbl_Table,{{"ContactID", type text}, {"Contact", type text}, {"Job Title", type text}, {"Street", type text}, {"City", type text}, {"State or Province", type text}, {"Postal Code", type text}, {"Country", type text}, {"Latitude", type number}, {"Longitude", type number}, {"Phone", type text}, {"ContactSeq", Int64.Type}, {"AccountSeq", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_QueryRelationships = {"columnCount":15,"keyColumnNames":[],"queryRelationships":[],"columnIdentities":["Section1/Contacts/Changed Type.{ContactSeq,0}","Section1/Contacts/Changed Type.{ContactID,1}","Section1/Contacts/Changed Type.{Contact,2}","Section1/Contacts/ContactTbl_Table.{FirstName,3}","Section1/Contacts/ContactTbl_Table.{LastName,4}","Section1/Contacts/Changed Type.{AccountSeq,5}","Section1/Contacts/Changed Type.{Job Title,6}","Section1/Contacts/Changed Type.{Street,7}","Section1/Contacts/Changed Type.{City,8}","Section1/Contacts/Changed Type.{State or Province,9}","Section1/Contacts/Changed Type.{Postal Code,10}","Section1/Contacts/Changed Type.{Country,11}","Section1/Contacts/Changed Type.{Latitude,12}","Section1/Contacts/Changed Type.{Longitude,13}","Section1/Contacts/Changed Type.{Phone,14}"],"ColumnCount":15,"KeyColumnNames":[],"ColumnIdentities":["Section1/Contacts/Changed Type.{ContactSeq,0}","Section1/Contacts/Changed Type.{ContactID,1}","Section1/Contacts/Changed Type.{Contact,2}","Section1/Contacts/ContactTbl_Table.{FirstName,3}","Section1/Contacts/ContactTbl_Table.{LastName,4}","Section1/Contacts/Changed Type.{AccountSeq,5}","Section1/Contacts/Changed Type.{Job Title,6}","Section1/Contacts/Changed Type.{Street,7}","Section1/Contacts/Changed Type.{City,8}","Section1/Contacts/Changed Type.{State or Province,9}","Section1/Contacts/Changed Type.{Postal Code,10}","Section1/Contacts/Changed Type.{Country,11}","Section1/Contacts/Changed Type.{Latitude,12}","Section1/Contacts/Changed Type.{Longitude,13}","Section1/Contacts/Changed Type.{Phone,14}"],"RelationshipInfo":[]}
+
+	annotation PBI_ResultType = Table
+

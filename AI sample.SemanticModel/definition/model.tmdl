@@ -1,0 +1,31 @@
+/// Sales and Customer Service analytics sample. Contains Opportunities (sales pipeline) and Cases (support tickets) as fact tables, with shared dimensions for Accounts, Contacts, Products, Owners, and Campaigns. Includes separate date tables for opportunity Close Date and case Created On. Measures cover revenue, forecast, win rate, case volume, SLA, escalations, and CSAT impact — with owner-level variants provided via USERELATIONSHIP.
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["Accounts","Industries","Opportunities","Owners","Products","Cases","Contacts","Territories","Query1"]
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["MCP-PBIModeling","DevMode"]
+
+ref table Accounts
+ref table Industries
+ref table Opportunities
+ref table Owners
+ref table Products
+ref table 'Opportunity Forecast Adjustment'
+ref table Cases
+ref table 'Case Calendar'
+ref table 'Opportunity Calendar'
+ref table Contacts
+ref table Territories
+
+ref cultureInfo en-US
+
